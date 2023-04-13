@@ -1,0 +1,99 @@
+<div style="margin-top: auto;" class="p-grid">
+    <div class="p-col-12 p-md-3">
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-user" style="line-height: 1.25;"></i></span>
+            <input type="text" #inpNombre placeholder="Nombre">         
+        </div>
+    </div>
+    <div class="p-col-12 p-md-3">
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-user" style="line-height: 1.25;"></i></span>
+            <input type="text" #inpApellidos placeholder="Apellidos">         
+        </div>
+    </div>
+    <div class="p-col-12 p-md-3">
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+            <p-calendar #fechaNacim placeholder="Fecha de nacimiento" [(ngModel)]="date" [locale]="es" dateFormat="dd/mm/yy"></p-calendar>         
+        </div>
+    </div>
+    <div class="p-col-12 p-md-3">
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-home" style="line-height: 1.25;"></i></span>
+            <input type="text" #inpDireccion placeholder="Dirección">         
+        </div>
+    </div>
+    <div class="p-col-12 p-md-3">
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-home" style="line-height: 1.25;"></i></span>
+            <input type="text" #inpCp placeholder="Código postal">         
+        </div>
+    </div>
+    <div class="p-col-12 p-md-3">
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-home" style="line-height: 1.25;"></i></span>
+            <input type="text" #inpLocal placeholder="Localidad">         
+        </div>
+    </div>
+    <div class="p-col-12 p-md-3">
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-home" style="line-height: 1.25;"></i></span>
+            <input type="text" #inpProv placeholder="Provincia">         
+        </div>
+    </div>
+    <div class="p-col-12 p-md-3">
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-home" style="line-height: 1.25;"></i></span>
+            <input type="text" #inpTelefono placeholder="Telefono">         
+        </div>
+    </div>
+    <div class="p-col-12 p-md-3">
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-home" style="line-height: 1.25;"></i></span>
+            <input type="text" #inpMovil placeholder="Móvil">         
+        </div>
+    </div>
+    <div class="p-col-12 p-md-3">
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-home" style="line-height: 1.25;"></i></span>
+            <input type="text" #inpMail placeholder="Mail">         
+        </div>
+    </div>
+    <div class="p-col-12 p-md-3">
+        <p-dropdown placeholder="Forma de Pago" [options]="pago" [(ngModel)]="selectedPago" optionLabel="nombre"></p-dropdown>
+    </div>
+    <div class="p-col-12 p-md-3">
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+            <p-calendar #fechaIni placeholder="Fecha de inicio" [(ngModel)]="dateIni" [locale]="es" dateFormat="dd/mm/yy"></p-calendar>         
+        </div>
+    </div>
+    <div class="p-col-12 p-md-12">
+        <div class="p-col-12 p-md-3">
+            <p-checkbox name="group2" [binary]="true" label="Yoga" [(ngModel)]="yoga" inputId="yoga"></p-checkbox>
+        </div>
+        <div class="p-col-12 p-md-3">
+            <p-checkbox name="group2" [binary]="true" label="Pilates" [(ngModel)]="pilates" inputId="pilates"></p-checkbox>
+        </div>
+        <div class="p-col-12 p-md-3">
+            <p-checkbox name="group2" [binary]="true" label="Hipopresivos" [(ngModel)]="hipopresivos" inputId="hipopresivos"></p-checkbox>
+        </div>
+        <div class="p-col-12 p-md-3">
+            <p-checkbox name="group2" [binary]="true" label="Jueves" [(ngModel)]="jueves" inputId="jueves"></p-checkbox>
+        </div>
+        <div class="p-col-12 p-md-3">
+            <p-checkbox name="group2" [binary]="true" label="Viernes" [(ngModel)]="viernes" inputId="viernes"></p-checkbox>
+        </div>
+        <div class="p-col-12 p-md-3">
+            <p-checkbox name="group2" [binary]="true" label="Sabado" [(ngModel)]="sabado" inputId="sabado"></p-checkbox>
+        </div>
+        <div class="p-col-12 p-md-3">
+            <p-checkbox name="group2" [binary]="true" label="Domingo" [(ngModel)]="domingo" inputId="domingo"></p-checkbox>
+        </div>
+    </div>
+    <div class="p-col-12 p-md-3">
+        <div class="ui-inputgroup">
+            <p-button label="Guardar" (click)="handleClick()"></p-button>      
+        </div>
+    </div>
+</div>

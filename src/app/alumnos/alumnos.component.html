@@ -1,0 +1,119 @@
+<div>
+    <p-tabView>
+        <p-tabPanel header="Listado de Alumnos">
+            <div>
+                <p-table #tblAlumnos
+                    [globalFilterFields]="['nombre']"
+                    [columns]="colsAlumno" 
+                    [value]="arrAlumnos" 
+                    dataKey="_id" 
+                    selectionMode="single" 
+                    [(selection)]="selectedAlumno"
+                    (onRowSelect)="onRowSelectAlumno($event)"
+                    [paginator]="false" 
+                    [rows]="5"
+                    [totalRecords]="totalRecords"
+                    [responsive]="true"
+                    [metaKeySelection]="false">
+                    <ng-template pTemplate="caption">
+                        <div style="text-align: right">        
+                            <input type="text" pInputText size="50" placeholder="Busqueda" (input)="search($event)" style="width:100%">
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                                {{col.header}}
+                                <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="rowData" >
+                            <td *ngFor="let col of columns">
+                                <b>{{rowData[col.field]}}</b>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+            <div *ngIf="selectedAlumno">
+                <div style="margin-top: auto;" class="p-grid">
+                    <div class="p-col-12 p-md-4">
+                        <p-chips (onRemove)="removeChipClase($event)" [(ngModel)]="matriculado">
+                            <ng-template let-item pTemplate="item">
+                                {{item}} - (active) <i class="fa fa-user" style="margin-right:2em"></i>
+                            </ng-template>
+                        </p-chips>
+                    </div>
+                    <div class="p-col-12 p-md-4">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+                            <p-calendar #fechaFin placeholder="Fecha de fin" [(ngModel)]="dateFin" [locale]="es" dateFormat="dd/mm/yy"></p-calendar>         
+                        </div>
+                    </div>
+                    <div class="p-col-12 p-md-4">
+                        <div class="ui-inputgroup">
+                            <p-button label="Matricular" (click)="handleClick()"></p-button>      
+                        </div>
+                    </div>
+                    <div class="p-col-12 p-md-2">
+                        <p-radioButton name="group2" value="1" label="Un día" [(ngModel)]="diasMatricula" inputId="preopt1"></p-radioButton>
+                    </div>
+                    <div class="p-col-12 p-md-2">
+                        <p-radioButton name="group2" value="2" label="Dos días" [(ngModel)]="diasMatricula" inputId="preopt1"></p-radioButton>
+                    </div>
+                    <div class="p-col-12 p-md-2">
+                        <p-radioButton name="group2" value="3" label="Tres días" [(ngModel)]="diasMatricula" inputId="preopt1"></p-radioButton>
+                    </div>
+                    <div class="p-col-12 p-md-2">
+                        <p-radioButton name="group2" value="4" label="Cuatro días" [(ngModel)]="diasMatricula" inputId="preopt1"></p-radioButton>
+                    </div>
+                    <div class="p-col-12 p-md-2">
+                        <p-radioButton name="group2" value="5" label="Cinco días" [(ngModel)]="diasMatricula" inputId="preopt1"></p-radioButton>
+                    </div>
+                    <p-table #tblClases [columns]="colsClase" [value]="arrClases" [(selection)]="selectedClases" (onRowUnselect)="onRowUnSelectClase($event)" (onRowSelect)="onRowSelectClase($event)" dataKey="_id">
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <tr [pSelectableRow]="rowData">
+                                <td *ngFor="let col of columns">
+                                    <div class="ui-g-1">
+                                        <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                                    </div>
+                                    <div class="ui-g-4">
+                                        <b>{{rowData.id_actividad.nombre}}</b>
+                                    </div>
+                                    <div class="ui-g-4">
+                                        <b>{{rowData.nombre}}</b>
+                                    </div>
+                                    <div *ngIf="rowData.lunes" class="ui-g-4">
+                                        <b>Lunes</b>
+                                    </div>
+                                    <div *ngIf="rowData.martes" class="ui-g-4">
+                                        <b>Martes</b>
+                                    </div>
+                                    <div *ngIf="rowData.miercoles" class="ui-g-4">
+                                        <b>Miércoles</b>
+                                    </div>
+                                    <div *ngIf="rowData.jueves" class="ui-g-4">
+                                        <b>Jueves</b>
+                                    </div>
+                                    <div *ngIf="rowData.viernes" class="ui-g-4">
+                                        <b>Viernes</b>
+                                    </div>
+                                    <div class="ui-g-4">
+                                        <b>{{rowData.hora_inicio}} - {{rowData.hora_fin}}</b>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Nuevo Alumno">
+            <div>
+                <app-crear-alumno></app-crear-alumno>
+            </div>
+        </p-tabPanel>
+    </p-tabView>     
+</div>

@@ -1,0 +1,107 @@
+<div>
+    <p-tabView [activeIndex]="index" (onChange)="handleChange($event)">
+        <p-tabPanel header="Listado de Actividades">
+            <div>
+                <p-table #tblActividades
+                    [globalFilterFields]="['nombre']"
+                    [columns]="colsActividad" 
+                    [value]="arrActividades" 
+                    dataKey="_id" 
+                    selectionMode="single" 
+                    [(selection)]="selectedActividad"
+                    (onRowSelect)="onSelectActividad()"
+                    [paginator]="false" 
+                    [rows]="5"
+                    [totalRecords]="totalRecordsActividades"
+                    [responsive]="true"
+                    [metaKeySelection]="false">
+                    <ng-template pTemplate="caption">
+                        <div style="text-align: right">        
+                            <input type="text" pInputText size="50" placeholder="Busqueda" (input)="search($event)" style="width:100%">
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="rowData" >
+                            <td *ngFor="let col of columns">
+                                <div class="ui-g-12">
+                                    <a href="#" [pRowToggler]="rowData">
+                                        <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                                    </a>
+                                    <b>{{rowData.nombre}}</b>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+                        <tr>
+                            <td [attr.colspan]="columns.length">
+                                <div class="p-col-6">
+                                    <b>{{rowData.descripcion}}</b>
+                                </div>
+                                <div class="p-col-6">
+                                    <div class="ui-inputgroup">
+                                        <p-button label="Editar" (click)="handleClick(rowData)"></p-button>      
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+            <p-panel header="Clases" [style]="{'width':'100%', 'height':'100%', 'margin-bottom':'20px'}">
+                <div>
+                    <p-table #tblClases
+                        [globalFilterFields]="['nombre']"
+                        [columns]="colsClase" 
+                        [value]="arrSelectClases" 
+                        dataKey="_id" 
+                        selectionMode="single" 
+                        [(selection)]="selectedClase"
+                        [paginator]="false" 
+                        [rows]="5"
+                        [totalRecords]="totalRecordsClases"
+                        [responsive]="true"
+                        [metaKeySelection]="false">
+                        <ng-template pTemplate="caption">
+                            <div style="text-align: right">        
+                                <input type="text" pInputText size="50" placeholder="Busqueda" (input)="search($event)" style="width:100%">
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <tr [pSelectableRow]="rowData" >  
+                                <td *ngFor="let col of columns">
+                                    <div class="ui-g-12">
+                                        <b>{{rowData.nombre}}</b>
+                                    </div>
+                                    <div *ngIf="rowData.lunes" class="ui-g-4">
+                                        <b>Lunes</b>
+                                    </div>
+                                    <div *ngIf="rowData.martes" class="ui-g-4">
+                                        <b>Martes</b>
+                                    </div>
+                                    <div *ngIf="rowData.miercoles" class="ui-g-4">
+                                        <b>Miércoles</b>
+                                    </div>
+                                    <div *ngIf="rowData.jueves" class="ui-g-4">
+                                        <b>Jueves</b>
+                                    </div>
+                                    <div *ngIf="rowData.viernes" class="ui-g-4">
+                                        <b>Viernes</b>
+                                    </div>
+                                    <div class="ui-g-12">
+                                        <b>{{rowData.hora_inicio}} - {{rowData.hora_fin}}</b>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </p-panel>
+        </p-tabPanel>
+        <p-tabPanel header="Nueva Actividad">
+            <div>
+                <app-crear-actividad></app-crear-actividad>
+            </div>
+        </p-tabPanel>
+    </p-tabView>     
+</div>
